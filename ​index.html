@@ -1,0 +1,232 @@
+!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আস্থা অনলাইন শপ | প্রিমিয়াম কালেকশন ও অনলাইন অর্ডার</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Hind Siliguri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Hind Siliguri', system-ui, -apple-system, sans-serif; }
+        html { scroll-behavior: smooth; }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-100 selection:text-amber-900">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-slate-900 text-white text-xs py-1.5 px-4 text-center font-medium flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+        <span>🚚 সারা বাংলাদেশে হোম ডেলিভারি সুবিধা</span>
+        <span class="hidden sm:inline text-slate-500">·</span>
+        <span>📦 ডেলিভারির সময় পার্সেল চেক সুবিধা</span>
+        <span class="hidden md:inline text-slate-500">·</span>
+        <span class="hidden md:inline-flex items-center gap-1.5 text-amber-300">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>লাইভ ভিজিটর: <span id="headerVisitorCount">১,৪৩০</span> জন</span>
+        </span>
+        <span class="hidden sm:inline text-slate-500">·</span>
+        <span>📞 হেল্পলাইন: <a href="tel:01903277383" class="hover:underline font-mono">01903-277383</a></span>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <!-- Brand -->
+            <a href="#" class="flex items-center gap-2.5 text-slate-900 group">
+                <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold text-xl shadow-sm">
+                    🛍️
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900 block leading-tight">
+                        আস্থা অনলাইন শপ
+                    </span>
+                    <span class="text-xs text-slate-500 font-medium hidden sm:block">
+                        প্রিমিয়াম ফ্যাশন কালেকশন
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="#collections" class="hover:text-blue-700 transition-colors">পোশাক কালেকশন</a>
+                <a href="#how-to-order" class="hover:text-blue-700 transition-colors">সহজ নিয়ম</a>
+                <a href="#order-section" class="hover:text-blue-700 transition-colors">অনলাইন অর্ডার</a>
+                <button onclick="openCustomerOrdersModal()" class="hover:text-blue-700 transition-colors flex items-center gap-1 cursor-pointer">
+                    <span>আমার অর্ডার (<span id="customerOrderCount">০</span>)</span>
+                </button>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2.5 shrink-0">
+                <button onclick="openAdminModal()" title="অ্যাডমিন প্যানেল" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer flex items-center gap-1 text-xs font-semibold">
+                    <span class="text-base">⚙️</span>
+                    <span class="hidden sm:inline">অ্যাডমিন</span>
+                </button>
+
+                <a href="tel:01903277383" class="hidden sm:flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-lg transition-colors font-mono">
+                    <span class="text-emerald-600">📞</span>
+                    <span>01903-277383</span>
+                </a>
+
+                <a href="#order-section" class="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-sm transition-all active:scale-95">
+                    <span>অর্ডার করুন 🛒</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <div class="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white py-12 md:py-16 mb-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-500/20 text-blue-300 text-xs font-semibold mb-4 border border-blue-400/30">
+                    <span>✨ নতুন কালেকশন ২০২৬ · স্পেশাল ডিসকাউন্ট</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-3 leading-tight">
+                    আস্থা অনলাইন শপ
+                </h1>
+                <p class="text-slate-200 text-base sm:text-lg mb-6 leading-relaxed">
+                    পছন্দের পোশাক বেছে নিয়ে শতভাগ সততা ও আস্থার সাথে অর্ডার করুন। নিখুঁত সেলাই, প্রিমিয়াম সফট কটন ফেব্রিক এবং সারা বাংলাদেশে দ্রুত হোম ডেলিভারি।
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="#collections" class="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-lg transition-all shadow-md active:scale-95">
+                        <span>কালেকশন দেখুন ও অর্ডার করুন</span>
+                        <span>↓</span>
+                    </a>
+                    <a href="https://wa.me/8801903277383" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors border border-white/20">
+                        <span>💬 হোয়াটসঅ্যাপে যোগাযোগ</span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-8 pt-6 border-t border-white/10 text-xs text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span>ডেলিভারির সময় চেক সুবিধা</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-blue-400 font-bold">✓</span>
+                        <span>ক্যাশ অন ডেলিভারি (COD)</span>
+                    </div>
+                    <div class="flex items-center gap-2 col-span-2 sm:col-span-1">
+                        <span class="text-amber-400 font-bold">✓</span>
+                        <span>১০০% কোয়ালিটি নিশ্চয়তা</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 w-full">
+        
+        <!-- Easy Order Step Notice -->
+        <div id="how-to-order" class="mb-6 bg-amber-50/90 border border-amber-200 rounded-xl p-4 sm:p-5 text-slate-800 shadow-sm">
+            <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 font-bold mt-0.5">
+                    💡
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-sm font-bold text-amber-900 mb-1">
+                        সহজ ৩ ধাপের অর্ডার নিয়ম:
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2 text-xs sm:text-sm">
+                        <div class="flex items-center gap-2 bg-white/80 p-2 rounded-lg border border-amber-100">
+                            <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center shrink-0">১</span>
+                            <span class="font-medium text-slate-700">পোশাকের ছবির ওপর ক্লিক করুন</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/80 p-2 rounded-lg border border-amber-100">
+                            <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center shrink-0">২</span>
+                            <span class="font-medium text-slate-700">সাইজ ও সঠিক ঠিকানা দিন</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/80 p-2 rounded-lg border border-amber-100">
+                            <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center shrink-0">৩</span>
+                            <span class="font-medium text-slate-700">অর্ডার সাবমিট করুন</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Search Section -->
+        <div class="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-sm mb-8">
+            <div class="relative mb-3.5">
+                <input
+                    type="text"
+                    id="searchInput"
+                    onkeyup="handleSearch()"
+                    placeholder="🔍 ড্রেসের নাম বা কোড দিয়ে খুঁজুন (যেমন: M01, W01, K01, শার্ট, থ্রি-পিস)..."
+                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+                />
+            </div>
+
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-sm no-scrollbar" id="categoryTabs">
+                <button onclick="setCategory('all')" id="tab-all" class="cat-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 bg-blue-700 text-white shadow-xs">
+                    ✨ সব কালেকশন (<span id="count-all">৬</span>)
+                </button>
+                <button onclick="setCategory('mens')" id="tab-mens" class="cat-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    👔 ছেলেদের পোশাক (<span id="count-mens">২</span>)
+                </button>
+                <button onclick="setCategory('womens')" id="tab-womens" class="cat-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    👗 মেয়েদের পোশাক (<span id="count-womens">২</span>)
+                </button>
+                <button onclick="setCategory('kids')" id="tab-kids" class="cat-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    👶 বাচ্চাদের পোশাক (<span id="count-kids">২</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Grid Section -->
+        <section id="collections" class="mb-12">
+            <div class="flex items-center justify-between border-b-2 border-blue-600 pb-2.5 mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>📦 আমাদের পোশাক কালেকশন</span>
+                </h2>
+                <span class="text-xs sm:text-sm font-semibold text-slate-500" id="collectionCountText">
+                    মোট ৬ টি পোশাক প্রদর্শিত
+                </span>
+            </div>
+
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                <!-- Products rendered via JS -->
+            </div>
+        </section>
+
+        <!-- Online Order Section -->
+        <section id="order-section" class="bg-white rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-sm scroll-mt-24 mb-16">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-xs font-bold text-blue-700 uppercase tracking-widest bg-blue-50 px-2.5 py-1 rounded-md">
+                    সহজ ক্যাশ অন ডেলিভারি
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                    📝 অনলাইন অর্ডার ফর্ম
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">
+                    নিচের তথ্যগুলো পূরণ করে এখনই আপনার অর্ডারটি কনফার্ম করুন
+                </p>
+            </div>
+
+            <!-- Selected Product Banner -->
+            <div id="selectedProductBanner" class="bg-blue-50/80 border border-blue-200 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <!-- Content dynamically populated -->
+            </div>
+
+            <!-- Validation Error Alert -->
+            <div id="orderErrorBox" class="hidden mb-6 p-3.5 bg-rose-50 border border-rose-200 rounded-lg text-rose-700 text-sm font-semibold"></div>
+
+            <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+                <!-- Size & Quantity -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                            সাইজ বেছে নিন *
+                        </label>
+                        <select id="prodSize" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ri
